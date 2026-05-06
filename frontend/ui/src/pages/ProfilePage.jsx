@@ -36,6 +36,7 @@ const ProfilePage = ({ handleThemeChange }) => {
         navigate("/login");
       }
     };
+
     fetchUser();
   }, [navigate]);
 
@@ -48,9 +49,12 @@ const ProfilePage = ({ handleThemeChange }) => {
     }
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (!file) {
+      return;
+    }
+
     setSelectedFile(file);
 
     const reader = new FileReader();
@@ -63,6 +67,7 @@ const ProfilePage = ({ handleThemeChange }) => {
       alert("Nothing to update");
       return;
     }
+
     setLoading(true);
 
     try {
@@ -75,7 +80,6 @@ const ProfilePage = ({ handleThemeChange }) => {
       }
 
       const res = await updateProfileRequest(formData);
-
       setUser(res.data);
       setSelectedFile(null);
       setPreview("");
@@ -86,134 +90,100 @@ const ProfilePage = ({ handleThemeChange }) => {
     }
   };
 
-  if (!user) return <CircularProgress sx={{ display: "block", mt: 10, mx: "auto" }} />;
+  if (!user) {
+    return <CircularProgress sx={{ display: "block", mt: 10, mx: "auto" }} />;
+  }
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundImage:
-          "linear-gradient(135deg, #fff7f2, #ffe0e9, #e0f0ff)",
-        py: 6,
-      }}
-    >
-      <Container maxWidth="md">
+    <Box sx={{ minHeight: "100vh", bgcolor: "#0f1117", py: 4 }}>
+      <Container maxWidth="lg">
         <Paper
-          elevation={8}
+          elevation={0}
           sx={{
-            borderRadius: 3,
+            border: "1px solid #2a3140",
             overflow: "hidden",
+            bgcolor: "#171c26",
           }}
         >
           <Grid container>
             <Grid
               size={{ xs: 12, md: 4 }}
               sx={{
-                backgroundImage: "linear-gradient(180deg, #ffe0e9, #e0f0ff)",
-                color: "#2c2c2c",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
                 p: 3,
+                borderBottom: { xs: "1px solid #2a3140", md: "none" },
+                borderRight: { md: "1px solid #2a3140" },
+                bgcolor: "#1d2330",
               }}
             >
-              <Avatar
-                src={preview || user.profilepic || "https://via.placeholder.com/120"}
-                sx={{ width: 120, height: 120, mb: 2 }}
-              >
-                {user.fullname?.[0]}
-              </Avatar>
-              <Typography variant="h6" gutterBottom>
-                {user.fullname}
-              </Typography>
-              <Typography variant="body2" sx={{ wordBreak: "break-all" }}>
-                {user.email}
-              </Typography>
+              <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+                <Avatar
+                  src={preview || user.profilepic || ""}
+                  sx={{ width: 112, height: 112, border: "3px solid #2f3747" }}
+                >
+                  {user.fullname?.[0]}
+                </Avatar>
+                <Typography sx={{ color: "#e7ecf8", fontWeight: 700, mt: 0.5 }}>
+                  {user.fullname}
+                </Typography>
+                <Typography sx={{ color: "#98a2b8", fontSize: 14, textAlign: "center", wordBreak: "break-all" }}>
+                  {user.email}
+                </Typography>
+              </Box>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 8 }}>
-              <Box sx={{ p: 4 }}>
-                <Typography variant="h5" fontWeight={600} mb={1}>
-                  Profile settings
-                </Typography>
-                <Typography variant="body2" color="text.secondary" mb={3}>
-                  Update your display name, avatar and theme.
-                </Typography>
+            <Grid size={{ xs: 12, md: 8 }} sx={{ p: 3 }}>
+              <Typography variant="h5" sx={{ color: "#e7ecf8", fontWeight: 700 }}>
+                Profile Settings
+              </Typography>
+              <Typography sx={{ color: "#98a2b8", mt: 0.5, mb: 3 }}>
+                Update your display details and app theme.
+              </Typography>
 
-                <Box sx={{ mb: 2 }}>
-                  <TextField
-                    label="Display Name"
-                    value={nameInput}
-                    onChange={(e) => setNameInput(e.target.value)}
-                    fullWidth
-                  />
-                </Box>
+              <TextField
+                label="Display Name"
+                value={nameInput}
+                onChange={(event) => setNameInput(event.target.value)}
+                fullWidth
+                sx={{ mb: 2.25, "& .MuiOutlinedInput-root": { bgcolor: "#0f1420" } }}
+              />
 
-                <Box sx={{ mb: 2 }}>
-                  <Button component="label" variant="outlined">
-                    Choose Profile Picture
-                    <input
-                      type="file"
-                      accept="image/*"
-                      hidden
-                      onChange={handleFileChange}
-                    />
-                  </Button>
-                  {selectedFile && (
-                    <Typography variant="caption" sx={{ ml: 1 }}>
-                      {selectedFile.name}
-                    </Typography>
-                  )}
-                </Box>
-
-                <Button
-                  variant="contained"
-                  sx={{ mt: 1, mb: 3 }}
-                  onClick={handleSaveProfile}
-                  disabled={loading}
-                >
-                  {loading ? "Saving..." : "Save Changes"}
+              <Box sx={{ mb: 2.25 }}>
+                <Button component="label" variant="outlined">
+                  Upload Profile Picture
+                  <input type="file" accept="image/*" hidden onChange={handleFileChange} />
                 </Button>
-
-                <Typography variant="subtitle2" gutterBottom>
-                  Theme
-                </Typography>
-                <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
-                  <Button variant="contained" onClick={() => handleThemeChange("light")}>
-                    Light
-                  </Button>
-                  <Button variant="contained" color="secondary" onClick={() => handleThemeChange("dark")}>
-                    Dark
-                  </Button>
-                  <Button
-                    variant="contained"
-                    sx={{ backgroundColor: "#4caf50" }}
-                    onClick={() => handleThemeChange("green")}
-                  >
-                    Green
-                  </Button>
-                </Stack>
-
-                <Stack direction="row" spacing={2}>
-                  <Button
-                    variant="outlined"
-                    onClick={() => navigate("/dashboard")}
-                  >
-                    Back to Dashboard
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </Button>
-                </Stack>
+                {selectedFile && (
+                  <Typography sx={{ ml: 1.5, color: "#9aa4b8", fontSize: 13, display: "inline-block" }}>
+                    {selectedFile.name}
+                  </Typography>
+                )}
               </Box>
+
+              <Button variant="contained" onClick={handleSaveProfile} disabled={loading} sx={{ mb: 3 }}>
+                {loading ? "Saving..." : "Save Changes"}
+              </Button>
+
+              <Typography sx={{ color: "#c7cfde", mb: 1, fontWeight: 600 }}>Theme</Typography>
+              <Stack direction="row" spacing={1.25} sx={{ mb: 3, flexWrap: "wrap" }}>
+                <Button variant="contained" onClick={() => handleThemeChange("light")}>
+                  Light
+                </Button>
+                <Button variant="contained" color="secondary" onClick={() => handleThemeChange("dark")}>
+                  Dark
+                </Button>
+                <Button variant="contained" sx={{ bgcolor: "#2e8f57" }} onClick={() => handleThemeChange("green")}>
+                  Green
+                </Button>
+              </Stack>
+
+              <Stack direction="row" spacing={1.25}>
+                <Button variant="outlined" onClick={() => navigate("/dashboard")}>
+                  Back to Chat
+                </Button>
+                <Button variant="contained" color="error" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </Stack>
             </Grid>
           </Grid>
         </Paper>

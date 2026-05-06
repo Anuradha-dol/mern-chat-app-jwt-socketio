@@ -9,7 +9,7 @@ import ProfilePage from "../pages/ProfilePage";
 import SignUpPage from "../pages/SignUpPage";
 
 const App = () => {
-  const [themeName, setThemeName] = useState("light");
+  const [themeName, setThemeName] = useState("dark");
   const theme = getThemeByName(themeName);
 
   const handleThemeChange = (themeName) => {

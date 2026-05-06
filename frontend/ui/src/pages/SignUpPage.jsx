@@ -6,10 +6,10 @@ import {
   Container,
   Grid,
   Paper,
-  Typography,
   TextField,
+  Typography,
 } from "@mui/material";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signupRequest } from "../api/auth.api";
 
 const SignUpPage = () => {
@@ -22,20 +22,21 @@ const SignUpPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (event) => {
+    setFormData((prev) => ({ ...prev, [event.target.name]: event.target.value }));
     setError("");
     setSuccess("");
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const { fullname, email, password } = formData;
 
     if (!fullname || !email || !password) {
       setError("All fields are required");
       return;
     }
+
     if (password.length < 6) {
       setError("Password must be at least 6 characters");
       return;
@@ -43,11 +44,9 @@ const SignUpPage = () => {
 
     try {
       const res = await signupRequest({ fullname, email, password });
-
-      setSuccess(`Welcome, ${res.data.fullname}! Redirecting to your chats...`);
+      setSuccess(`Welcome, ${res.data.fullname}. Redirecting to login...`);
       setFormData({ fullname: "", email: "", password: "" });
-
-      setTimeout(() => navigate("/dashboard"), 1500);
+      setTimeout(() => navigate("/login"), 1200);
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
     }
@@ -59,125 +58,98 @@ const SignUpPage = () => {
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
-        backgroundImage:
-          "linear-gradient(135deg, #fff7f2, #ffe0e9, #e0f0ff)",
+        bgcolor: "#0f1117",
+        py: 3,
       }}
     >
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Paper
-          elevation={8}
+          elevation={0}
           sx={{
             overflow: "hidden",
-            borderRadius: 3,
+            border: "1px solid #2a3140",
+            bgcolor: "#171c26",
           }}
         >
           <Grid container>
             <Grid
               size={{ xs: 12, md: 6 }}
               sx={{
-                display: { xs: "none", md: "flex" },
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundImage:
-                  "url('https://images.pexels.com/photos/7130491/pexels-photo-7130491.jpeg?auto=compress&cs=tinysrgb&w=1200')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                position: "relative",
+                p: { xs: 3, md: 5 },
+                borderBottom: { xs: "1px solid #2a3140", md: "none" },
+                borderRight: { md: "1px solid #2a3140" },
+                bgcolor: "#1d2330",
               }}
             >
-              <Box
-                sx={{
-                  position: "absolute",
-                  inset: 0,
-                  bgcolor: "rgba(255, 192, 203, 0.45)", // soft rose overlay
-                }}
-              />
-              <Box sx={{ position: "relative", p: 4, color: "#fff7f2" }}>
-                <Typography variant="h4" fontWeight={700} gutterBottom sx={{ letterSpacing: 0.5 }}>
-                  Welcome to ChatSphere
+              <Typography variant="h4" sx={{ mb: 1, color: "#e7ecf8", fontWeight: 700 }}>
+                ChatSphere
+              </Typography>
+              <Typography sx={{ color: "#a4aec4", mb: 3 }}>
+                Create your account and start real-time chat with a clean Discord and WhatsApp inspired layout.
+              </Typography>
+              <Box sx={{ display: "grid", gap: 1.5 }}>
+                <Typography sx={{ color: "#c5cdde", fontSize: 14 }}>
+                  • Live online users
                 </Typography>
-                <Typography variant="body1">
-                  Create your account and start chatting in real time with a clean,
-                  WhatsApp-style experience.
+                <Typography sx={{ color: "#c5cdde", fontSize: 14 }}>
+                  • Instant message updates
+                </Typography>
+                <Typography sx={{ color: "#c5cdde", fontSize: 14 }}>
+                  • Image messages, edit and delete support
                 </Typography>
               </Box>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Box
-                sx={{
-                  p: 4,
-                  bgcolor: "#fff7f2",
-                }}
-              >
-                <Typography variant="h5" fontWeight={600} mb={1} sx={{ color: "#333" }}>
-                  Create an account
-                </Typography>
-                <Typography variant="body2" color="text.secondary" mb={3}>
-                  Sign up with your details to join the conversation.
-                </Typography>
+            <Grid size={{ xs: 12, md: 6 }} sx={{ p: { xs: 3, md: 5 }, bgcolor: "#171c26" }}>
+              <Typography variant="h5" sx={{ color: "#e7ecf8", fontWeight: 700, mb: 0.5 }}>
+                Create Account
+              </Typography>
+              <Typography sx={{ color: "#9ba5bc", mb: 2.5 }}>Sign up to continue.</Typography>
 
-                {error && (
-                  <Alert severity="error" sx={{ mb: 2 }}>
-                    {error}
-                  </Alert>
-                )}
-                {success && (
-                  <Alert severity="success" sx={{ mb: 2 }}>
-                    {success}
-                  </Alert>
-                )}
+              {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+              {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
 
-                <Box component="form" onSubmit={handleSubmit} noValidate>
-                  <TextField
-                    fullWidth
-                    label="Full Name"
-                    name="fullname"
-                    value={formData.fullname}
-                    onChange={handleChange}
-                    margin="normal"
-                  />
-                  <TextField
-                    fullWidth
-                    label="Email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    margin="normal"
-                  />
-                  <TextField
-                    fullWidth
-                    label="Password"
-                    name="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    margin="normal"
-                  />
-
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{
-                      mt: 3,
-                      mb: 1.5,
-                      py: 1.2,
-                      backgroundImage:
-                        "linear-gradient(135deg, #ff9aa2, #a2c5ff)",
-                    }}
-                  >
-                    Sign Up
-                  </Button>
-                </Box>
-
-                <Typography variant="body2" sx={{ mt: 1 }}>
-                  Already have an account?{" "}
-                  <Link to="/login">Log in</Link>
-                </Typography>
+              <Box component="form" noValidate onSubmit={handleSubmit}>
+                <TextField
+                  fullWidth
+                  label="Full Name"
+                  name="fullname"
+                  value={formData.fullname}
+                  onChange={handleChange}
+                  margin="normal"
+                  sx={{ "& .MuiOutlinedInput-root": { bgcolor: "#0f1420" } }}
+                />
+                <TextField
+                  fullWidth
+                  label="Email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  margin="normal"
+                  sx={{ "& .MuiOutlinedInput-root": { bgcolor: "#0f1420" } }}
+                />
+                <TextField
+                  fullWidth
+                  label="Password"
+                  name="password"
+                  type="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  margin="normal"
+                  sx={{ "& .MuiOutlinedInput-root": { bgcolor: "#0f1420" } }}
+                />
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 2.5, py: 1.1 }}>
+                  Sign Up
+                </Button>
               </Box>
+
+              <Typography sx={{ mt: 2, color: "#9ba5bc", fontSize: 14 }}>
+                Already have an account?{" "}
+                <Link to="/login" style={{ color: "#7f8cff" }}>
+                  Log in
+                </Link>
+              </Typography>
             </Grid>
           </Grid>
         </Paper>
