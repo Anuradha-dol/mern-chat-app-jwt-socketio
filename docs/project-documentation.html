@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ChatSphere Project Documentation</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: #172033;
+        background: #ffffff;
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 10.6pt;
+        line-height: 1.55;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        font-size: 33pt;
+        line-height: 1.05;
+        letter-spacing: 0;
+        margin-bottom: 12px;
+      }
+
+      h2 {
+        font-size: 18pt;
+        margin: 0 0 10px;
+        color: #101827;
+      }
+
+      h3 {
+        font-size: 12.5pt;
+        margin: 18px 0 6px;
+        color: #1b2940;
+      }
+
+      p {
+        margin-bottom: 9px;
+      }
+
+      ul {
+        margin: 7px 0 12px 18px;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 4px;
+      }
+
+      code,
+      pre {
+        font-family: Consolas, "Courier New", monospace;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        background: #f2f5fa;
+        border: 1px solid #d8e0eb;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 9.3pt;
+        line-height: 1.35;
+      }
+
+      .cover {
+        min-height: 258mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 22mm 16mm;
+        margin: -14mm;
+        color: #eef4ff;
+        background:
+          linear-gradient(135deg, rgba(32, 178, 107, 0.3), transparent 35%),
+          linear-gradient(315deg, rgba(91, 108, 248, 0.35), transparent 40%),
+          #101724;
+        page-break-after: always;
+      }
+
+      .cover-label {
+        color: #8fa4c6;
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
+        font-size: 9pt;
+        font-weight: 700;
+      }
+
+      .cover-subtitle {
+        max-width: 155mm;
+        color: #c8d3e7;
+        font-size: 13pt;
+      }
+
+      .cover-meta {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .meta-card {
+        border: 1px solid rgba(180, 197, 226, 0.24);
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+        padding: 12px;
+      }
+
+      .meta-card strong {
+        display: block;
+        color: #ffffff;
+        font-size: 10.5pt;
+      }
+
+      .meta-card span {
+        color: #b7c4dc;
+        font-size: 8.7pt;
+      }
+
+      .section {
+        page-break-inside: avoid;
+        margin-bottom: 18px;
+      }
+
+      .page {
+        page-break-before: always;
+      }
+
+      .muted {
+        color: #5e6b7f;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 8px 0 13px;
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 5px 8px;
+        border-radius: 999px;
+        background: #edf2fa;
+        border: 1px solid #dbe4f0;
+        color: #24334d;
+        font-size: 8.8pt;
+        font-weight: 600;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .card {
+        border: 1px solid #d9e1ec;
+        border-radius: 10px;
+        padding: 12px;
+        background: #fbfcff;
+      }
+
+      .card h3 {
+        margin-top: 0;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin: 10px 0 14px;
+      }
+
+      .flow-step {
+        min-height: 34mm;
+        padding: 10px;
+        border-radius: 10px;
+        background: #101724;
+        color: #d9e5fb;
+      }
+
+      .flow-step strong {
+        display: block;
+        color: #ffffff;
+        margin-bottom: 5px;
+      }
+
+      figure {
+        margin: 14px 0 18px;
+        page-break-inside: avoid;
+      }
+
+      figure img {
+        width: 100%;
+        height: auto;
+        border: 1px solid #cfd8e6;
+        border-radius: 10px;
+        display: block;
+      }
+
+      figcaption {
+        margin-top: 6px;
+        color: #5d6878;
+        font-size: 9pt;
+      }
+
+      .small {
+        font-size: 9.2pt;
+      }
+
+      .toc {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px 16px;
+        margin-top: 12px;
+      }
+
+      .toc div {
+        padding: 8px 0;
+        border-bottom: 1px solid #e1e7f0;
+        color: #29384f;
+        font-weight: 600;
+      }
+
+      .footer-note {
+        color: #78869a;
+        font-size: 8.5pt;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="cover">
+      <div>
+        <div class="cover-label">Project Documentation</div>
+        <h1>ChatSphere<br>MERN Real-Time Chat Application</h1>
+        <p class="cover-subtitle">
+          A full-stack chat project I built with MongoDB, Express.js, React, Node.js,
+          JWT authentication, Socket.IO real-time updates, and Cloudinary image uploads.
+        </p>
+        <div class="cover-meta">
+          <div class="meta-card">
+            <strong>Stack</strong>
+            <span>MERN, Socket.IO, MUI</span>
+          </div>
+          <div class="meta-card">
+            <strong>Focus</strong>
+            <span>Realtime chat and auth</span>
+          </div>
+          <div class="meta-card">
+            <strong>Docs</strong>
+            <span>Architecture and UI walkthrough</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-note">
+        Prepared as project documentation for the ChatSphere repository.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Overview</h2>
+      <p>
+        I built ChatSphere as a practical MERN chat application, not just as a static UI.
+        The project includes account creation, secure login, protected API routes, a real-time
+        messaging dashboard, user presence, image support, editable messages, soft-deleted
+        messages, and a profile settings page.
+      </p>
+      <p>
+        The backend is responsible for security, persistence, file upload integration, and
+        socket events. The frontend is responsible for the user journey, API calls, socket
+        connection, message state, profile updates, and the visual layout.
+      </p>
+      <div class="toc">
+        <div>1. Technology stack</div>
+        <div>2. Repository structure</div>
+        <div>3. Backend implementation</div>
+        <div>4. Realtime message flow</div>
+        <div>5. Frontend implementation</div>
+        <div>6. UI screenshots</div>
+        <div>7. Security notes</div>
+        <div>8. Local setup</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Technology Stack</h2>
+      <div class="pill-row">
+        <span class="pill">MongoDB</span>
+        <span class="pill">Mongoose</span>
+        <span class="pill">Express.js</span>
+        <span class="pill">Node.js</span>
+        <span class="pill">React</span>
+        <span class="pill">Vite</span>
+        <span class="pill">Material UI</span>
+        <span class="pill">Socket.IO</span>
+        <span class="pill">JWT</span>
+        <span class="pill">bcryptjs</span>
+        <span class="pill">Cloudinary</span>
+        <span class="pill">Multer</span>
+        <span class="pill">Axios</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Frontend</h3>
+          <p>
+            I used React with Vite because it keeps development fast and simple.
+            Material UI handles the main interface components, layout, buttons, forms,
+            avatars, badges, and theme setup. Axios is used through one shared HTTP
+            client so all API calls use the same base URL and cookie settings.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Backend</h3>
+          <p>
+            I used Express.js with a clear route-controller-model structure. MongoDB stores
+            users and messages through Mongoose models. JWT cookies protect private routes,
+            bcryptjs hashes passwords, and Cloudinary stores uploaded images.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section page">
+      <h2>Repository Structure</h2>
+      <p>
+        I kept the project split into backend, frontend, and documentation folders. This makes
+        the repo easier to scan and avoids mixing server code, UI code, and project documents.
+      </p>
+      <pre>mern-chat-app-jwt-socketio/
+|-- backend/
+|   |-- src/
+|   |   |-- config/
+|   |   |-- controllers/
+|   |   |-- middleware/
+|   |   |-- models/
+|   |   |-- routes/
+|   |   |-- utils/
+|   |   `-- index.js
+|   |-- .env.example
+|   `-- package.json
+|-- frontend/
+|   `-- ui/
+|       |-- src/
+|       |   |-- api/
+|       |   |-- app/
+|       |   |-- constants/
+|       |   |-- pages/
+|       |   `-- theme/
+|       |-- .env.example
+|       `-- package.json
+|-- docs/
+|   |-- screenshots/
+|   |-- project-documentation.html
+|   `-- project-documentation.pdf
+|-- .gitignore
+|-- package.json
+`-- README.md</pre>
+      <p>
+        The root <code>package.json</code> works like a small command center. It lets me run
+        backend and frontend commands from the main project folder while still keeping each
+        app's dependencies inside its own folder.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Backend Implementation</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Authentication</h3>
+          <p>
+            Signup validates the required fields, checks duplicate emails, hashes the password,
+            saves the user, and creates a JWT cookie. Login compares the password with the
+            stored hash and refreshes the cookie. Logout clears the cookie.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Protected Routes</h3>
+          <p>
+            The auth middleware reads the JWT from the cookie, verifies it, loads the user from
+            MongoDB, removes the password field, and attaches the user to the request before
+            allowing private routes to continue.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Messages</h3>
+          <p>
+            Message APIs load conversation history, create messages, edit own messages, and
+            soft-delete own messages. Soft delete keeps the conversation timeline stable while
+            hiding the original text and image from the UI.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Uploads</h3>
+          <p>
+            Profile image uploads use Multer memory storage and Cloudinary upload streams.
+            Chat image messages are sent as Base64 from the client and then uploaded to
+            Cloudinary before the message is saved.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section page">
+      <h2>Real-Time Flow</h2>
+      <p>
+        The main chat experience combines REST APIs with Socket.IO. I used REST for the main
+        write operations because it keeps validation, authentication, and database saving in
+        the same backend flow. After the database change is complete, Socket.IO broadcasts
+        the update to the sender and receiver.
+      </p>
+
+      <div class="flow">
+        <div class="flow-step">
+          <strong>1. Auth Check</strong>
+          The frontend checks the logged-in user through the protected auth endpoint.
+        </div>
+        <div class="flow-step">
+          <strong>2. Socket Connect</strong>
+          The client connects to Socket.IO with the current user id in the query.
+        </div>
+        <div class="flow-step">
+          <strong>3. Save Message</strong>
+          The backend saves the message in MongoDB through the protected message API.
+        </div>
+        <div class="flow-step">
+          <strong>4. Broadcast</strong>
+          The backend emits events so both chat participants update instantly.
+        </div>
+      </div>
+
+      <h3>Socket Events I Used</h3>
+      <ul>
+        <li><code>getOnlineUsers</code> keeps the sidebar online/offline state updated.</li>
+        <li><code>newMessage</code> appends new messages to the active conversation.</li>
+        <li><code>messageUpdated</code> replaces the edited message in the current UI state.</li>
+        <li><code>messageDeleted</code> marks a message as deleted without removing its record.</li>
+      </ul>
+      <p>
+        The backend also has a direct socket <code>sendMessage</code> handler. The current UI path
+        mainly uses the REST endpoint for sending messages, then relies on Socket.IO for the live
+        update. That gives the project a clean persistence-first flow.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Frontend Implementation</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Auth Screens</h3>
+          <p>
+            The signup and login pages use controlled React form state, simple validation,
+            API error handling, and navigation after successful requests. The interface uses
+            a dark, focused layout instead of a plain default form.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Dashboard</h3>
+          <p>
+            The dashboard has a compact icon rail, user list, online badges, message panel,
+            emoji picker, image picker, edit controls, delete controls, and a send box. It
+            loads users and conversation history from the backend.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Profile</h3>
+          <p>
+            The profile page lets the user update display name, preview a selected image,
+            upload the profile picture, choose a theme, return to chat, or logout.
+          </p>
+        </div>
+        <div class="card">
+          <h3>API Layer</h3>
+          <p>
+            I separated API calls into small files under <code>src/api</code>. The shared
+            Axios client uses <code>withCredentials</code>, so the JWT cookie is included
+            automatically when calling protected endpoints.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section page">
+      <h2>UI Screenshots</h2>
+      <figure>
+        <img src="screenshots/auth-screens.png" alt="Login and signup screens">
+        <figcaption>
+          Login and signup screens. These are the entry points for authenticated chat access.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <img src="screenshots/dashboard-empty-state.png" alt="Dashboard empty state">
+        <figcaption>
+          Dashboard empty state. The left side shows users and presence, while the main area
+          waits for a selected conversation.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section page">
+      <figure>
+        <img src="screenshots/realtime-messaging.png" alt="Real-time messaging screen">
+        <figcaption>
+          Real-time messaging screen. The UI shows active conversations, online status,
+          image messages, edit actions, delete actions, and live message updates.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <img src="screenshots/profile-settings-theme.png" alt="Profile settings and theme selection">
+        <figcaption>
+          Profile settings and theme selection. The user can update profile details, upload
+          a profile image, change theme, return to chat, or logout.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section page">
+      <h2>Security and Data Handling</h2>
+      <ul>
+        <li>Passwords are hashed with bcryptjs before saving to MongoDB.</li>
+        <li>JWT is stored in an HTTP-only cookie instead of localStorage.</li>
+        <li>Private API routes use middleware to verify the cookie before continuing.</li>
+        <li>CORS is configured with allowed client origins and credentials support.</li>
+        <li>Profile image upload uses server-side Cloudinary upload handling.</li>
+        <li>Deleted messages are soft-deleted, so the chat history does not break.</li>
+      </ul>
+
+      <h2>Local Setup</h2>
+      <pre>npm run install:all
+npm run dev:backend
+npm run dev:frontend</pre>
+      <p>
+        The backend runs on <code>http://localhost:3000</code> by default. The Vite frontend
+        normally runs on <code>http://localhost:5173</code>. MongoDB and Cloudinary credentials
+        should be added to <code>backend/.env</code> using <code>backend/.env.example</code>
+        as the template.
+      </p>
+
+      <h2>What I Would Improve Next</h2>
+      <ul>
+        <li>Add unread message counts and notification badges.</li>
+        <li>Support multiple active sockets per user more explicitly.</li>
+        <li>Add typing indicators and delivered/read status.</li>
+        <li>Add backend tests for auth and message permissions.</li>
+        <li>Add deployment configuration for frontend and backend hosting.</li>
+      </ul>
+      <p class="muted small">
+        This document is written to explain the project as an individual full-stack build,
+        including the implementation decisions and the current feature set.
+      </p>
+    </section>
+  </body>
+</html>
