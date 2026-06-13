@@ -1,0 +1,24 @@
+{
+  "name": "chatsphere-mern-realtime-chat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack MERN real-time chat application with JWT authentication, Socket.IO messaging, and Cloudinary image uploads.",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend/ui install",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend/ui run dev",
+    "start:backend": "npm --prefix backend run start",
+    "build:frontend": "npm --prefix frontend/ui run build",
+    "lint:frontend": "npm --prefix frontend/ui run lint"
+  },
+  "keywords": [
+    "mern",
+    "chat",
+    "socket.io",
+    "jwt",
+    "react",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "ISC"
+}
