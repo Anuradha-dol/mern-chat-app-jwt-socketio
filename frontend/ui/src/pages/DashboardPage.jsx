@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import {
   Avatar,
   Badge,
@@ -336,7 +336,7 @@ const DashboardPage = () => {
             const isSelected = selectedChat?._id === chatUser._id;
 
             return (
-              <React.Fragment key={chatUser._id}>
+              <Fragment key={chatUser._id}>
                 <ListItemButton
                   selected={isSelected}
                   onClick={() => setSelectedChat(chatUser)}
@@ -373,7 +373,7 @@ const DashboardPage = () => {
                     secondaryTypographyProps={{ sx: { color: isOnline ? "#2cb87a" : "#8b96ae", fontSize: 12 } }}
                   />
                 </ListItemButton>
-              </React.Fragment>
+              </Fragment>
             );
           })}
         </List>

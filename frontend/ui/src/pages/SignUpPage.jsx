@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Alert,
   Box,
@@ -89,13 +89,13 @@ const SignUpPage = () => {
               </Typography>
               <Box sx={{ display: "grid", gap: 1.5 }}>
                 <Typography sx={{ color: "#c5cdde", fontSize: 14 }}>
-                  • Live online users
+                  - Live online users
                 </Typography>
                 <Typography sx={{ color: "#c5cdde", fontSize: 14 }}>
-                  • Instant message updates
+                  - Instant message updates
                 </Typography>
                 <Typography sx={{ color: "#c5cdde", fontSize: 14 }}>
-                  • Image messages, edit and delete support
+                  - Image messages, edit and delete support
                 </Typography>
               </Box>
             </Grid>

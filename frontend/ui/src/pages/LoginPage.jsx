@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Alert,
   Box,
@@ -76,13 +76,13 @@ const LoginPage = () => {
               </Typography>
               <Box sx={{ display: "grid", gap: 1.5 }}>
                 <Typography sx={{ color: "#c5cdde", fontSize: 14 }}>
-                  • Sidebar user presence
+                  - Sidebar user presence
                 </Typography>
                 <Typography sx={{ color: "#c5cdde", fontSize: 14 }}>
-                  • Smooth real-time updates
+                  - Smooth real-time updates
                 </Typography>
                 <Typography sx={{ color: "#c5cdde", fontSize: 14 }}>
-                  • Message history with edit/delete
+                  - Message history with edit/delete
                 </Typography>
               </Box>
             </Grid>
