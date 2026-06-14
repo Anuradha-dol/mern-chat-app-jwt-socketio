@@ -1,16 +1,29 @@
-# ChatSphere - MERN Real-Time Chat App
+# ChatSphere
 
-ChatSphere is a full-stack real-time chat application I built with the MERN stack. The main goal of this project was to make a clean messaging experience with authentication, live online status, image messages, profile updates, and real-time message changes using Socket.IO.
+ChatSphere is my MERN real-time chat app. It now opens with a calm landing page, then moves into signup, login, and a one-to-one chat dashboard with live messages, online status, image sharing, profile updates, and theme settings.
 
-I kept the app simple to run, but the internal structure is separated properly: the backend handles API routes, authentication, database models, Cloudinary uploads, and Socket.IO events, while the frontend handles the chat dashboard, auth screens, profile page, themes, and API communication.
+I kept the project simple to run, but the main parts are still separated properly. The backend handles API routes, authentication, database models, Cloudinary uploads, and Socket.IO events. The frontend handles the landing page, auth screens, chat dashboard, profile page, themes, and API communication.
 
-## Project Report
+## Documentation
 
-I added a more detailed project document with screenshots, architecture notes, feature explanation, and the technical flow I used:
+The app starts on a natural ChatSphere landing page instead of going straight to signup. I split the detailed documentation into two PDF files: one for UI screenshots and one for the project report.
 
-[Open the professional PDF report](docs/project-documentation.pdf)
-
-Screenshot assets are also stored in [docs/screenshots](docs/screenshots).
+<table>
+  <tr>
+    <td width="68%">
+      <img src="docs/screenshots/landing-page.png" alt="ChatSphere landing page">
+    </td>
+    <td>
+      <strong>UI Screenshots</strong><br>
+      <a href="docs/ui-screenshots.pdf">Open UI screenshots PDF</a>
+      <br><br>
+      <strong>Project Report</strong><br>
+      <a href="docs/project-report.pdf">Open project report PDF</a>
+      <br><br>
+      Screenshot assets are stored in <a href="docs/screenshots">docs/screenshots</a>.
+    </td>
+  </tr>
+</table>
 
 ## What I Used
 
@@ -27,6 +40,7 @@ Screenshot assets are also stored in [docs/screenshots](docs/screenshots).
 
 ## Main Features
 
+- Natural landing page with a 4K-sized hero background
 - User signup, login, logout, and auth check
 - Password hashing before saving user accounts
 - JWT token stored in an HTTP-only cookie
@@ -56,6 +70,8 @@ mern-chat-app-jwt-socketio/
 |   `-- package.json
 |-- frontend/
 |   `-- ui/
+|       |-- public/
+|       |   `-- assets/
 |       |-- src/
 |       |   |-- api/
 |       |   |-- app/
@@ -66,13 +82,14 @@ mern-chat-app-jwt-socketio/
 |       `-- package.json
 |-- docs/
 |   |-- screenshots/
-|   `-- project-documentation.pdf
+|   |-- project-report.pdf
+|   `-- ui-screenshots.pdf
 |-- .gitignore
 |-- package.json
 `-- README.md
 ```
 
-This structure keeps backend, frontend, and documentation separate. I also added root-level npm scripts so the project can be managed from the main folder without remembering every nested command.
+This structure keeps backend, frontend, public assets, and documentation separate. I also added root-level npm scripts so the project can be managed from the main folder without remembering every nested command.
 
 ## How the Real-Time Flow Works
 
@@ -158,13 +175,17 @@ npm run lint:frontend
 
 ## Screenshots
 
-| Auth Screens | Chat Dashboard |
+| Landing Page | Auth Screens |
 | --- | --- |
-| ![Login and signup screens](docs/screenshots/auth-screens.png) | ![Real-time messaging screen](docs/screenshots/realtime-messaging.png) |
+| ![ChatSphere landing page](docs/screenshots/landing-page.png) | ![Login and signup screens](docs/screenshots/auth-screens.png) |
 
-| Empty Chat State | Profile Settings |
+| Chat Dashboard | Empty Chat State |
 | --- | --- |
-| ![Dashboard empty state](docs/screenshots/dashboard-empty-state.png) | ![Profile settings and theme selection](docs/screenshots/profile-settings-theme.png) |
+| ![Real-time messaging screen](docs/screenshots/realtime-messaging.png) | ![Dashboard empty state](docs/screenshots/dashboard-empty-state.png) |
+
+| Profile Settings |
+| --- |
+| ![Profile settings and theme selection](docs/screenshots/profile-settings-theme.png) |
 
 ## Notes
 

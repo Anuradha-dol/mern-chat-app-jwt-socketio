@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { getThemeByName } from "../theme/appThemes";
 import DashboardPage from "../pages/DashboardPage";
+import LandingPage from "../pages/LandingPage";
 import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
 import SignUpPage from "../pages/SignUpPage";
@@ -25,7 +26,8 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/profile" element={<ProfilePage handleThemeChange={handleThemeChange} />} />
-          <Route path="/" element={<Navigate to="/signup" />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </ThemeProvider>
