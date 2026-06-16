@@ -11,7 +11,7 @@ The app starts on a natural ChatSphere landing page instead of going straight to
 <table>
   <tr>
     <td width="68%">
-      <img src="docs/screenshots/landing-page.png" alt="ChatSphere landing page">
+      <img src="docs/landing-page.png" alt="ChatSphere landing page">
     </td>
     <td>
       <strong>UI Screenshots</strong><br>
@@ -19,8 +19,7 @@ The app starts on a natural ChatSphere landing page instead of going straight to
       <br><br>
       <strong>Project Report</strong><br>
       <a href="docs/project-report.pdf">Open project report PDF</a>
-      <br><br>
-      Screenshot assets are stored in <a href="docs/">docs</a>.
+      <br>
     </td>
   </tr>
 </table>
