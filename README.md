@@ -20,7 +20,7 @@ The app starts on a natural ChatSphere landing page instead of going straight to
       <strong>Project Report</strong><br>
       <a href="docs/project-report.pdf">Open project report PDF</a>
       <br><br>
-      Screenshot assets are stored in <a href="docs/screenshots">docs</a>.
+      Screenshot assets are stored in <a href="docs">docs</a>.
     </td>
   </tr>
 </table>
